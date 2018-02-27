@@ -24,7 +24,8 @@ const api = (function(){
       return {
         id: element.id.videoId,
         title: element.snippet.title,
-        thumbnail: element.snippet.thumbnails.default.url
+        thumbnail: element.snippet.thumbnails.default.url,
+        isVideoShowing: false
       };
     });
     return responseArray;
