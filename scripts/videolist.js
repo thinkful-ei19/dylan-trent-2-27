@@ -7,9 +7,7 @@ const videoList = (function(){
   const generateListItem = function (video) {
     return `<li id='${video.id}'>
                   <p>${video.title}</p>
-                  <a target="_blank" href=https://www.youtube.com/watch?v=${video.id}>
                     <img src='${video.thumbnail}'>
-                  </a>
                 </li>`;
 
   };
@@ -32,6 +30,14 @@ const videoList = (function(){
     });
   };
 
+  const addYoutubeVideo = function(video){
+    $(`#${video.id}`).html(`<p>${video.title}</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/${video.id}" 
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <button>Cancel</button>`);
+  };
+
+
   //listen for when user clicks on thumbnail
   //add iframe html to DOM
   //maybe some toggle button to close out of embedded youtube video
@@ -41,8 +47,14 @@ const videoList = (function(){
   };
   
   return {
-    bindEventListeners
+    bindEventListeners,
+    addYoutubeVideo
   };
 
 
 }());
+
+let obj = {
+  id: 'gjNukU-3jPk',
+  title: 'test1'
+};
