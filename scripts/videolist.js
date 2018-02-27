@@ -32,8 +32,9 @@ const videoList = (function(){
       event.preventDefault();
       const searchInput = $('#search-term');
       const searchTerm = searchInput.val();
+      store.searchTerm = searchTerm;
       searchInput.val('');
-      api.fetchVideos(searchTerm, function(response) {
+      api.fetchVideos(searchTerm, '', function(response) {
         console.log(response);
         const videos = api.decorateResponse(response);
         store.setVideos(videos);
@@ -63,13 +64,38 @@ const videoList = (function(){
   };
 
   
-  //listen for when user clicks on thumbnail
-  //add iframe html to DOM x 
-  //maybe some toggle button to close out of embedded youtube video
+  const handlePrevButton = function (){
+    $('#previous-button').click(function(){
+      api.fetchVideos(store.searchTerm, store.prevPageToken, function(response) {
+        console.log(response);
+        const videos = api.decorateResponse(response);
+        store.setVideos(videos);
+        render();
+      });
+    });
+  };
+  
+
+
+  const handleNextButton = function (){
+    $('#next-button').click(function(){
+      api.fetchVideos(store.searchTerm, store.nextPageToken, function(response) {
+        console.log(response);
+        const videos = api.decorateResponse(response);
+        store.setVideos(videos);
+        render();
+      });
+    });
+  };
+
+
+  
 
   const bindEventListeners = function(){
     handleFormSubmit();
     handleToggleYoutubeVideo();
+    handlePrevButton();
+    handleNextButton();
   };
   
   return {

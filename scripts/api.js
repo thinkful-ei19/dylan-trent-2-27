@@ -8,15 +8,18 @@ const api = (function(){
   
   const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
-  const fetchVideos = function (searchTerm, callback) {
+  const fetchVideos = function (searchTerm, pageToken, callback) {
     const query = {
       q: `${searchTerm}`,
       maxResults: 5,
       key: API_KEY,
-      part: 'snippet'
+      part: 'snippet',
+      pageToken
     };
   
     $.getJSON(BASE_URL, query, callback);
+
+  
   
   };
   const decorateResponse = function (response) {
@@ -25,9 +28,11 @@ const api = (function(){
         id: element.id.videoId,
         title: element.snippet.title,
         thumbnail: element.snippet.thumbnails.default.url,
-        isVideoShowing: false
+        isVideoShowing: false 
       };
     });
+    store.nextPageToken = response.nextPageToken;
+    store.prevPageToken = response.prevPageToken;
     return responseArray;
   };
 

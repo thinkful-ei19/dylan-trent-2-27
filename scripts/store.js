@@ -4,12 +4,18 @@
 const store = (function(){
   const videos = [];
 
+  let nextPageToken = '';
+  let prevPageToken = '';
+  let searchTerm;
+
   function setVideos(videos) {
     this.videos = videos;
   }
   return {
     videos,
-    setVideos
+    setVideos,
+    nextPageToken,
+    prevPageToken
   };
   
 }());
