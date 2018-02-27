@@ -9,8 +9,6 @@ const videoList = (function(){
     let imageClass = '';
     let iframeClass = 'hidden';
 
-    // video.isVideoShowing ? (imageClass = '' iframeClass = 'hidden') : (imageClass = 'hidden' && iframeClass = '');
-
     if (video.isVideoShowing) {
       imageClass = 'hidden';
       iframeClass = '';
@@ -55,7 +53,7 @@ const videoList = (function(){
     video.isVideoShowing = !video.isVideoShowing;
   };
 
-  const handleAddYoutubeVideo = function() {
+  const handleToggleYoutubeVideo = function() {
     $('.results').on('click', '.js-toggle-button', function(event) {
       const id = $(event.currentTarget).parent().attr('id');
       const video = store.videos.find(video => video.id === id);
@@ -64,12 +62,6 @@ const videoList = (function(){
     });
   };
 
-  // const handleCancelButton = function (){
-  //   $('ul').on('click', 'button', function(event){
-  //     console.log(event.currentTarget);
-  //   });
-  // };
-
   
   //listen for when user clicks on thumbnail
   //add iframe html to DOM x 
@@ -77,8 +69,7 @@ const videoList = (function(){
 
   const bindEventListeners = function(){
     handleFormSubmit();
-    handleAddYoutubeVideo();
-    // handleCancelButton();
+    handleToggleYoutubeVideo();
   };
   
   return {
