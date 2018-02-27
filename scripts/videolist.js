@@ -16,6 +16,7 @@ const videoList = (function(){
 
     return `<li class="js-video-item" id='${video.id}'>
                   <p>${video.title}</p>
+                  <a target="_blank" href="https://www.youtube.com/channel/${video.channelId}">${video.channelTitle}</a>
                   <img class="${imageClass}" src='${video.thumbnail}'>
                   <iframe class="${iframeClass}" width="560" height="315" src="https://www.youtube.com/embed/${video.id}" 
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -67,7 +68,6 @@ const videoList = (function(){
   const handlePrevButton = function (){
     $('#previous-button').click(function(){
       api.fetchVideos(store.searchTerm, store.prevPageToken, function(response) {
-        console.log(response);
         const videos = api.decorateResponse(response);
         store.setVideos(videos);
         render();
@@ -80,7 +80,6 @@ const videoList = (function(){
   const handleNextButton = function (){
     $('#next-button').click(function(){
       api.fetchVideos(store.searchTerm, store.nextPageToken, function(response) {
-        console.log(response);
         const videos = api.decorateResponse(response);
         store.setVideos(videos);
         render();

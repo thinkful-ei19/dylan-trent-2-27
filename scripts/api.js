@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $ */
+/* global $, store */
 
 // eslint-disable-next-line no-unused-vars
 const api = (function(){
@@ -28,6 +28,8 @@ const api = (function(){
         id: element.id.videoId,
         title: element.snippet.title,
         thumbnail: element.snippet.thumbnails.default.url,
+        channelId: element.snippet.channelId,
+        channelTitle: element.snippet.channelTitle,
         isVideoShowing: false 
       };
     });
