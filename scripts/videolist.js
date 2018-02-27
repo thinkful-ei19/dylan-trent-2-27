@@ -34,12 +34,18 @@ const videoList = (function(){
     $(`#${video.id}`).html(`<p>${video.title}</p>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/${video.id}" 
     frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    <button>Cancel</button>`);
+    <button id="${video.id}">Cancel</button>`);
   };
 
+  // const handleCancelButton = function (){
+  //   $('ul').on('click', 'button', function(event){
+  //     console.log(event.currentTarget);
+  //   })
+  // }
 
+  
   //listen for when user clicks on thumbnail
-  //add iframe html to DOM
+  //add iframe html to DOM x 
   //maybe some toggle button to close out of embedded youtube video
 
   const bindEventListeners = function(){
@@ -48,13 +54,12 @@ const videoList = (function(){
   
   return {
     bindEventListeners,
-    addYoutubeVideo
   };
 
 
 }());
 
-let obj = {
-  id: 'gjNukU-3jPk',
-  title: 'test1'
-};
+// let obj = {
+//   id: 'gjNukU-3jPk',
+//   title: 'test1'
+// };
