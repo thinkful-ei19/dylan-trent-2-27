@@ -7,7 +7,9 @@ const videoList = (function(){
   const generateListItem = function (video) {
     return `<li id='${video.id}'>
                   <p>${video.title}</p>
-                  <img src='${video.thumbnail}'>
+                  <a target="_blank" href=https://www.youtube.com/watch?v=${video.id}>
+                    <img src='${video.thumbnail}'>
+                  </a>
                 </li>`;
   };
   const render = function () {
