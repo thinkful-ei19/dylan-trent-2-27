@@ -44,11 +44,8 @@ const decorateResponse = function (response) {
       thumbnail: element.snippet.thumbnails.default.url
     };
   });
-  console.log(responseArray);
   return responseArray;
 };
-
-fetchVideos('batman', decorateResponse);
 
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
@@ -72,7 +69,7 @@ const generateVideoItemHtml = function (video) {
 // objects and sets the array as the value held in store.items
 // TEST IT!
 const addVideosToStore = function (videos) {
-
+  store.videos = videos;
 };
 
 
@@ -82,7 +79,9 @@ const addVideosToStore = function (videos) {
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function () {
-
+  const videoHTML = store.videos.map(generateVideoItemHtml);
+  // const videoHTML = store.videos.map(video => generateVideoItemHtml(video));
+  $('.results').html(videoHTML);
 };
 
 // TASK:
@@ -97,11 +96,22 @@ const render = function () {
 //   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function () {
-
+  $('form').submit(function(event) {
+    event.preventDefault();
+    const searchInput = $('#search-term');
+    const searchTerm = searchInput.val();
+    searchInput.val('');
+    fetchVideos(searchTerm, function(response) {
+      const videos = decorateResponse(response);
+      addVideosToStore(videos);
+      render();
+    });
+  });
 };
 
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
+  handleFormSubmit();
 });
