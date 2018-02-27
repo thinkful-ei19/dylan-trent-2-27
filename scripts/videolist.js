@@ -5,7 +5,7 @@
 // eslint-disable-next-line no-unused-vars
 const videoList = (function(){
   const generateListItem = function (video) {
-    return `<li id='${video.id}'>
+    return `<li class="js-video-item" id='${video.id}'>
                   <p>${video.title}</p>
                     <img src='${video.thumbnail}'>
                 </li>`;
@@ -37,6 +37,17 @@ const videoList = (function(){
     <button id="${video.id}">Cancel</button>`);
   };
 
+  const handleAddYoutubeVideo = function() {
+    $('.results').on('click', '.js-video-item', function(event) {
+      const id = $(event.currentTarget).attr('id');
+  
+      const video = store.videos.find(video => video.id === id);
+      addYoutubeVideo(video);
+
+      
+    });
+  };  
+
   // const handleCancelButton = function (){
   //   $('ul').on('click', 'button', function(event){
   //     console.log(event.currentTarget);
@@ -50,6 +61,7 @@ const videoList = (function(){
 
   const bindEventListeners = function(){
     handleFormSubmit();
+    handleAddYoutubeVideo();
   };
   
   return {
