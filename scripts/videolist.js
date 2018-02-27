@@ -11,6 +11,7 @@ const videoList = (function(){
                     <img src='${video.thumbnail}'>
                   </a>
                 </li>`;
+
   };
   const render = function () {
     const videoHTML = store.videos.map(generateListItem);
@@ -23,12 +24,17 @@ const videoList = (function(){
       const searchTerm = searchInput.val();
       searchInput.val('');
       api.fetchVideos(searchTerm, function(response) {
+        console.log(response);
         const videos = api.decorateResponse(response);
         store.setVideos(videos);
         render();
       });
     });
   };
+
+  //listen for when user clicks on thumbnail
+  //add iframe html to DOM
+  //maybe some toggle button to close out of embedded youtube video
 
   const bindEventListeners = function(){
     handleFormSubmit();
